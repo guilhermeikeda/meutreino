@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meu_treino/pages/criar-treino/rotas.dart';
 
 class InserirNomeScreen extends StatelessWidget {
   InserirNomeScreen({
@@ -13,26 +14,58 @@ class InserirNomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            TextField(
-              controller: controller,
-              autofocus: true,
-              textInputAction: TextInputAction.done,
-              decoration: const InputDecoration(
-                labelText: 'Nome do treino',
-                contentPadding: EdgeInsets.all(8),
+        child: Padding(
+          padding: EdgeInsets.only(left: 40, right: 40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    'Nome treino',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.blue
+                    ),
+                  ),
+                  TextField(
+                    style: TextStyle(color: Colors.blueGrey),
+                    controller: controller,
+                    textInputAction: TextInputAction.done,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.all(5),
+                    ),
+                    onSubmitted: (_) => navegarParaExercicios(context),
+                  ),
+                ],
               ),
-              onSubmitted: (_) =>
-                  {Navigator.of(context).pushNamed('criar-treino/exercicios')},
-            ),
-            TextButton(
-              child: Text('Cancelar'),
-              onPressed: onCancel,
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  FlatButton(
+                    child: Text('Cancelar'),
+                    onPressed: onCancel,
+                    textColor: Colors.pink,
+                  ),
+                  RaisedButton(
+                    textColor: Colors.white,
+                    color: Colors.blueAccent,
+                    child: Text('Proximo'),
+                    onPressed: () => navegarParaExercicios(context),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void navegarParaExercicios(BuildContext context) {
+    Navigator.of(context).pushNamed(Rotas.EXERCICIOS);
   }
 }
